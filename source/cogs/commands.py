@@ -114,7 +114,7 @@ class Commands(commands.Cog):
         desc = ""
         levels = sorted(map(int, config.keys()))
         for level in levels:
-            role_id = config[level]
+            role_id = config[str(level)]
             role = ctx.guild.get_role(role_id)
             if not role:
                 continue
