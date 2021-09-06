@@ -69,11 +69,6 @@ class Commands(commands.Cog):
     async def rank(self, ctx: Context):
         user = await self.bot.db.fetch_user(ctx.author.id, ctx.guild.id, False)
 
-        try:
-            await ctx.message.delete()
-        except:
-            pass
-
         if not user:
             await ctx.author.send(
                 "There isn't any rank info on you yet, try talking some more!"
