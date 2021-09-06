@@ -62,7 +62,7 @@ class Commands(commands.Cog):
 
             await ctx.send(embed=embed)
 
-    @commands.command(name="rank", aliases=["level", "levels"])
+    @commands.command(name="rank", aliases=["level"])
     @commands.guild_only()
     @commands.cooldown(rate=1, per=10, type=commands.BucketType.member)
     @not_banned()
@@ -96,6 +96,32 @@ class Commands(commands.Cog):
             await ctx.author.send(embed=embed)
         else:
             await ctx.send(embed=embed)
+
+    @commands.command(name="levels")
+    @commands.guild_only()
+    @commands.cooldown(rate=1, per=10, type=commands.BucketType.member)
+    @not_banned()
+    async def levels(self, ctx: Context):
+        """Show level roles."""
+        config = await ctx.guild_config()
+        config = config.get("roles", ROLES)
+
+        if not config:
+            return await ctx.send(
+                f"No level roles have been set up yet."
+            )
+
+        desc = ""
+        levels = sorted(config.keys())
+        for level in levels:
+            role_id = config[level]
+            role = ctx.guild.get_role(role_id)
+            if not role:
+                continue
+            desc += f"\n{level}: {role.mention}"
+
+        embed = Embed(title="Level Roles", colour=0x87CEEB, description=desc)
+        await ctx.send(embed=embed)
 
     @commands.group(name="breakdown", aliases=["lbd"])
     @commands.check_any(
