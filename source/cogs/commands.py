@@ -70,7 +70,7 @@ class Commands(commands.Cog):
         user = await self.bot.db.fetch_user(ctx.author.id, ctx.guild.id, False)
 
         if not user:
-            await ctx.author.send(
+            await ctx.send(
                 "There isn't any rank info on you yet, try talking some more!"
             )
 
