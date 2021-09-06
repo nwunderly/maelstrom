@@ -114,17 +114,6 @@ class Listener(commands.Cog):
         else:
             await self.bot.db.add_xp(message.author.id, message.guild.id, to_add)
 
-        # add new member roles if necessary
-        ducks = message.guild.get_role(874463455292301343)
-        news = message.guild.get_role(879526746582564964)
-        roles_to_add = []
-        if ducks not in message.author.roles:
-            roles_to_add.append(ducks)
-        if should_create and news not in message.author.roles:
-            roles_to_add.append(news)
-        if roles_to_add:
-            await message.author.add_roles(*roles_to_add)
-
         return current_xp, new
 
     async def level_up(self, message: Message, config: dict, level: int, required: int):
