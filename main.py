@@ -13,7 +13,7 @@ if __name__ == "__main__":
         "source.cogs.utility",
         "source.cogs.listener",
         "source.cogs.commands",
-        'souce.cogs.quack',
+        'source.cogs.quack',
     )
 
     bot.run(getenv("TOKEN"))
